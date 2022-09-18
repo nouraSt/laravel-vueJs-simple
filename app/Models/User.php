@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Competence;
+use App\Models\Offre;
+use App\Models\InfoSup;
 
 class User extends Authenticatable
 {
@@ -22,6 +25,17 @@ class User extends Authenticatable
         'email',
         'password',
     ];
+    public function competences(){
+        return $this->hasMany(Competence::class);
+    }
+    
+    public function offres(){
+        return $this->hasMany(Offre::class);
+    }
+    
+    public function infosup(){
+        return $this->hasOne(InfoSup::class,'id_user');
+    }
 
     /**
      * The attributes that should be hidden for serialization.
